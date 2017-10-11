@@ -57,7 +57,6 @@ def rectangle_fun():
     return rectangle
 
 
-
 rectangle = rectangle_fun()
 ruler = ruler_fun()
 

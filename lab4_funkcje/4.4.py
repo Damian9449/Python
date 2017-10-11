@@ -9,7 +9,6 @@ def Fibonaci_iter(n):
         fn = 0
         fn1 = 1
         fn2 = 1
-
         while n > 2:
             fn = fn1 + fn2
             fn1 = fn2
@@ -19,4 +18,4 @@ def Fibonaci_iter(n):
         return fn
 
 
-print(Fibonaci_iter(4))
+print(Fibonaci_iter(5))

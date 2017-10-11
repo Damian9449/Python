@@ -7,12 +7,14 @@ from math import pi
 def calc_pi(n=100):
     """Obliczanie liczby pi metoda Monte Carlo.
     n oznacza liczbe losowanych punktow."""
-    inside = 0
+	
+    inside = 0.0
     for i in range(0, n):
         x = random()
         y = random()
         if sqrt(x * x + y * y) <= 1:
             inside += 1
+	
     pi = 4 * inside / n
     return pi
 

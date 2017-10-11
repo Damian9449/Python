@@ -100,7 +100,7 @@ def combine_poly(poly1, poly2):         # poly1(poly2(x)), trudne!
     result = [0] * len(poly2) * poly1[len(poly1)-1] * 2
 
     for i in range(len(poly1)):
-        if i == 0:
+        if i is 0:
             result[0] = poly1[0]
 
         if i > 0:
@@ -116,7 +116,7 @@ def combine_poly(poly1, poly2):         # poly1(poly2(x)), trudne!
 
 def pow_poly(poly, n):                  # poly(x) ** n
 
-    if n == 1:
+    if n is 1:
         return poly
 
     elif n > 1:

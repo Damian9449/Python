@@ -122,4 +122,3 @@ class Frac:
 
     def __float__(self):       # float(frac)
         return float(self.x)/float(self.y)
-

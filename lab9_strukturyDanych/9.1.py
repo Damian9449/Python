@@ -46,7 +46,6 @@ def remove_tail(node):
 
             tmp_value, before.next = node.data, None
             return head, tmp_value
-
         else:
             return remove_head(head)
 

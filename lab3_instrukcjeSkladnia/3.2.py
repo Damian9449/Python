@@ -3,15 +3,16 @@
 #L = L.sort() # taki rodzaj sortowania jest w wykonany w miejscu
               # a obiekt zwracy to 'None'
 
-#x, y = 1, 2, 3 # zle przypisnaie krotki, za duzo cyfr po prawej stronie
-                # przypisania
+#x, y = 1, 2, 3 # w tym przykladzie mamy za duzo argumentow przypisania
+				# po jego prawej stronie
 
 #X = 1, 2, 3 ; X[1] = 4 # obiekty typu tuple nie wspiera przypisania
 
 #X = [1, 2, 3] ; X[3] = 4 # odwolania do elementu ktory nie istnieje
-                          # w pojemniku na dane
+                          # w liscie
 
 #X = "abc" ; X.append("d") # obiekt klasy string nie ma zdefniowanej
-                          #  metody append
+                           #  metody append
 
-map(pow, range(8)) # ten kod jest poprawny
+#map(pow, range(8))   # w tym przykladzie podane jest za malo argumentow
+					  # poniewaz funkcja pow przyjmuje minimum dwa argumenty

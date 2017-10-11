@@ -11,8 +11,6 @@ def heron(a, b, c):
     if L[0] + L[1] <= L[2]:
         raise ValueError("I can't calculate area of this triangle")
 	
-	print(a, b, c)
-	
     p = (a + b + c) / 2.0
 	
     area = sqrt(p * (p - a) * (p - b) * (p - c))

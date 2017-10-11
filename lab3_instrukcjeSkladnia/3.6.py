@@ -16,6 +16,7 @@ while heightRectangle > 0:
         tmp1 = tmp1 - 1
 
     rectangle = rectangle + "\n" + "|"
+	
     while tmp2 > 0:
         rectangle = rectangle + " "*3 + "|"
         tmp2 = tmp2 - 1

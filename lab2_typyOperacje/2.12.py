@@ -2,15 +2,14 @@
 
 line = "Przykladoy tekst do zadania z przedmiotu Python"
 
-initialLetters = ""
-terminalLetters = ""
+firstLetters = ""
+endLetters = ""
 
 allWords = line.split()
 
 for word in allWords:
-    initialLetters = initialLetters + word[0]
-    terminalLetters = terminalLetters + word[len(word)-1]
+    firstLetters = firstLetters + word[0]
+    endLetters = endLetters + word[len(word)-1]
 
-
-print(initialLetters)
-print(terminalLetters)
+print(firstLetters)
+print(endLetters)

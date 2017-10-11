@@ -33,8 +33,8 @@ class Rectangle:
 
     def center(self):          # zwraca srodek prostokata
         return Point(
-            (self.pt1.x + self.pt2.x)/2,
-            (self.pt1.y + self.pt2.y)/2 )
+            (self.pt1.x + self.pt2.x)/2.0,
+            (self.pt1.y + self.pt2.y)/2.0 )
 
     def area(self):            # pole powierzchni
         return abs( (self.pt1.x - self.pt2.x) * (self.pt1.y - self.pt2.y) )
