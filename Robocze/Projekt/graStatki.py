@@ -7,7 +7,6 @@ import time
 # czyszczenie ekranu
 os.system("clear")
 
-
 class Map:
 	# zmienne do interfejsu
 	PURPLE = '\033[95m'
@@ -386,7 +385,6 @@ class Game:
 		else:
 			self.my_map.manual_fill_map()
 		
-		
 		self.computer_map.fill_map()
 		
 		while check_win():
@@ -397,9 +395,6 @@ class Game:
 			
 				wsp_x = raw_input("Podaj wsp x: ")
 				wsp_y = raw_input("Podaj wsp y: ")
-				
-				# wsp_x = 'A'
-				# wsp_y = 1
 				
 				# konwersja wsp_x na int
 				try:
@@ -464,8 +459,7 @@ class Game:
 			print "q - menu glowne  ".center(pixel)
 			print "=====================".center(pixel)
 			print self.NORMAL
-			
-	
+				
 	# funkcja rysujaca interfejs menu
 	def draw(self, screen):
 		os.system("clear")
@@ -510,7 +504,6 @@ class Game:
 			print "q - menu glowne  ".center(pixel)
 			print "=====================".center(pixel)
 			print self.NORMAL
-		
 		
 		
 game = Game()
