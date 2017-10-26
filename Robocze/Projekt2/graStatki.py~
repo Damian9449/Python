@@ -1,0 +1,69 @@
+#!/usr/bin/python
+import os
+from random import randrange
+
+# czyszczenie ekranu
+os.system("clear")
+
+class Map:
+	heightMap = 5
+	weightMap = 5	
+	
+	# zmienne do interfejsu
+	PURPLE = '\033[95m'
+	BLUE = '\033[94m'
+	GREEN = '\033[92m'
+	YELLOW = '\033[93m'
+	RED = '\033[91m'
+	BOLD = '\033[1m'
+	UNDERLINE = '\033[4m'
+	NORMAL = '\033[0m'
+	
+	#zmienne potrzebne do wyrysowania map gry
+	myMap = ""
+	computerMap = ""
+
+	def init_map(self):
+		while self.heightMap > 0:
+		    print "@"
+		    self.heightMap -= 1
+	
+	def generate_map(self):
+		pass
+
+
+	def update_map(self, player):
+		pass
+
+	def view_end_game(self):
+		pass
+
+
+class Game:
+	
+	def __init__(self):
+	    my_map = Map()
+	    computer_map = Map()
+
+	def view_start_screen(self):
+	    print "Witamy w grze Statki"	
+	
+	def start_game(self):
+	        pass
+
+	def end_game(self):
+		pass
+
+	def do_shoot(self):
+		pass
+
+	def check_correct_shoot(self):
+		pass
+
+
+
+
+game = Game()
+game.view_start_screen()
+
+
