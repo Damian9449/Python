@@ -27,7 +27,7 @@ class Map:
 	def __getitem__(self, key):
 		return self.myMap[key]
 	
-	def __init__(self): # ok
+	def __init__(self):
 		# inicjacja mapy
 		myMapColumn = [self.BLUE+'.'+self.NORMAL for i in range(10)] + [' ']
 		self.myMap = [myMapColumn for i in range(10)]
@@ -42,7 +42,7 @@ class Map:
 		# inicjacja listy przechowujacej wylosowane statki
 		self.allShips = [list() for i in range(10)]		
 		
-	def __str__(self): # ok
+	def __str__(self):
 		return "Wskazane jest wypisanie mapy za pomoca specjalnej funkcji"
 	
 	def print_map(self):
@@ -52,7 +52,7 @@ class Map:
 			print ""
 	
 	# funkcja zamieniajaca znak na mapie
-	def update_map(self, wsp_x, wsp_y, character): #ok
+	def update_map(self, wsp_x, wsp_y, character):
 		self.myMap[wsp_y][wsp_x] = character
 	
 	def manual_fill_map(self):
@@ -164,7 +164,7 @@ class Map:
 		
 		self.print_map()
 	
-	def fill_map(self): # ok
+	def fill_map(self):
 	
 		# funkcja sprawdzajaca sasiadow
 		def chceck_neighbors(wsp_x, wsp_y):
@@ -441,7 +441,7 @@ class Game:
 		self.computer_map = Map()
 		self.tmp_map = Map()
 			
-		def check_win(): #ok
+		def check_win():
 			if mySunkenShips != 20 and computerSunkenShips != 20:
 				return True
 			else:
@@ -484,7 +484,7 @@ class Game:
 					nextShoot = 1
 				else:
 					nextShoot = 2
-					# jesli statek nie nostaltrafiony zaznaczamy tylko strzal
+					# jesli statek nie zostal trafiony zaznaczamy tylko strzal
 					self.tmp_map.update_map(i_wsp_x, i_wsp_y, '*')
 					
 			if nextShoot == 2:
