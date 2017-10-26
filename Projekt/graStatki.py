@@ -572,5 +572,6 @@ class Game:
 			print self.NORMAL
 		
 		
+		
 game = Game()
 game.start_game()
