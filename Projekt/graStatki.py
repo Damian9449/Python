@@ -51,6 +51,7 @@ class Map:
 				sys.stdout.write(node)
 			print ""
 	
+    
 	def update_map(self, wsp_x, wsp_y, character):
 		"""Change character on map"""
 		self.myMap[wsp_y][wsp_x] = character
