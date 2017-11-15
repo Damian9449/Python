@@ -37,13 +37,13 @@ import sys
 os.system("clear")
 
 class Map:
-    """Class representing the game map"""
-    PURPLE = '\033[95m'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    UNDERLINE = '\033[4m'
-    NORMAL = '\033[0m'
+	"""Class representing the game map"""
+	PURPLE = '\033[95m'
+	BLUE = '\033[94m'
+	GREEN = '\033[92m'
+	YELLOW = '\033[93m'
+	RED = '\033[91m'
+	UNDERLINE = '\033[4m'
+	NORMAL = '\033[0m'
 
-    myMap = list()
+	myMap = list()
