@@ -24,3 +24,26 @@ for i in "qwerty": if ord(i) < 150: print(i)
 # popownan w petlach w osobnych linijkach
 
 for i in "axby": print(ord(i) if ord(i) < 100 else i)
+
+
+
+#!/usr/bin/python
+
+import os
+from random import randrange
+import sys
+
+# clear console
+os.system("clear")
+
+class Map:
+	"""Class representing the game map"""
+	PURPLE = '\033[95m'
+	BLUE = '\033[94m'
+	GREEN = '\033[92m'
+	YELLOW = '\033[93m'
+	RED = '\033[91m'
+	UNDERLINE = '\033[4m'
+	NORMAL = '\033[0m'
+	
+	myMap = list()
