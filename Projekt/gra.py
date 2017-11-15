@@ -15,7 +15,7 @@ class Map:
 	YELLOW = '\033[93m'
 	RED = '\033[91m'
 	UNDERLINE = '\033[4m'
-	NORMAL = '\033[0m' 
+	NORMAL = '\033[0m'
 	
 	myMap = list()
 	
@@ -569,3 +569,4 @@ class Game:
 		
 game = Game()
 game.start_game()
+

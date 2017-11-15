@@ -14,12 +14,12 @@ class Map:
 	GREEN = '\033[92m'
 	YELLOW = '\033[93m'
 	RED = '\033[91m'
-	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
 	NORMAL = '\033[0m'
 	
 	myMap = list()
 	
+    
 	# list, which storing areas of all ships
 	allShips = []
 	
@@ -52,6 +52,7 @@ class Map:
 				sys.stdout.write(node)
 			print ""
 	
+    
 	def update_map(self, wsp_x, wsp_y, character):
 		"""Change character on map"""
 		self.myMap[wsp_y][wsp_x] = character
