@@ -19,6 +19,7 @@ class Map:
 	
 	myMap = list()
 	
+    
 	# list, which storing areas of all ships
 	allShips = []
 	
