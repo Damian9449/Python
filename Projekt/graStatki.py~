@@ -4,11 +4,11 @@ import os
 from random import randrange
 import sys
 
-# czyszczenie ekranu
+# clear console
 os.system("clear")
 
 class Map:
-	# zmienne interfejsu
+	"""Class representing the game map"""
 	PURPLE = '\033[95m'
 	BLUE = '\033[94m'
 	GREEN = '\033[92m'
@@ -18,17 +18,17 @@ class Map:
 	UNDERLINE = '\033[4m'
 	NORMAL = '\033[0m'
 	
-	# zmienna przechowujaca mape
 	myMap = list()
 	
-	# lista list przechowujaca pola okretow
+	# list, which storing areas of all ships
 	allShips = []
 	
 	def __getitem__(self, key):
+		"""Operator []"""
 		return self.myMap[key]
 	
 	def __init__(self):
-		# inicjacja mapy
+		"""Constructor of map"""
 		myMapColumn = [self.BLUE+'.'+self.NORMAL for i in range(10)] + [' ']
 		self.myMap = [myMapColumn for i in range(10)]
 		self.myMap.insert(0, [ self.GREEN+chr(x)+self.NORMAL for x in range(65, 75)])
@@ -39,24 +39,26 @@ class Map:
 		for i in range(10):
 			self.myMap[i+1] = [self.GREEN+str(i+1).zfill(2)+self.NORMAL] + self.myMap[i+1]
 		
-		# inicjacja listy przechowujacej wylosowane statki
 		self.allShips = [list() for i in range(10)]		
 		
 	def __str__(self):
+		"""Return a warning about bad map output"""
 		return "Wskazane jest wypisanie mapy za pomoca specjalnej funkcji"
 	
 	def print_map(self):
+		"""Write a map to standard output"""
 		for row in self.myMap:
 			for node in row:
 				sys.stdout.write(node)
 			print ""
 	
-	# funkcja zamieniajaca znak na mapie
 	def update_map(self, wsp_x, wsp_y, character):
+		"""Change character on map"""
 		self.myMap[wsp_y][wsp_x] = character
 	
 	def manual_fill_map(self):
-		# rozmieszczenie jedynek
+		"""Arrange the ships on the map manually"""
+		# place 4 ships with one field
 		tmp = 1
 		while tmp != 5:
 			os.system("clear")
@@ -65,16 +67,14 @@ class Map:
 			wsp_x = raw_input("Podaj wsp x: ")
 			wsp_y = raw_input("Podaj wsp y: ")
 			
-			# konwersja wsp_x na int
 			try:
 				i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-			except ValueError:                  # kod obslugujacy bledy
+			except ValueError:                 
 				print "Blad przy konwersji wsp x"
 			
-			# konwersja wsp_y na int
 			try:
 				i_wsp_y = int(wsp_y)
-			except ValueError:                  # kod obslugujacy bledy
+			except ValueError:                 
 				print "Blad pry konwersji wsp y"
 			
 			self.update_map(i_wsp_x, i_wsp_y, 'X')
@@ -82,7 +82,7 @@ class Map:
 			tmp += 1
 		
 		
-		#rozmieszczenie dwojek
+		# place 3 ships with two field
 		tmp = 1
 		while tmp != 4:
 			os.system("clear")
@@ -93,16 +93,14 @@ class Map:
 				wsp_x = raw_input("Podaj wsp x: ")
 				wsp_y = raw_input("Podaj wsp y: ")
 				
-				# konwersja wsp_x na int
 				try:
 					i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-				except ValueError:                  # kod obslugujacy bledy
+				except ValueError:                 
 					print "Blad przy konwersji wsp x"
 				
-				# konwersja wsp_y na int
 				try:
 					i_wsp_y = int(wsp_y)
-				except ValueError:                  # kod obslugujacy bledy
+				except ValueError:            
 					print "Blad pry konwersji wsp y"
 				
 				self.update_map(i_wsp_x, i_wsp_y, 'X')
@@ -110,7 +108,7 @@ class Map:
 				
 			tmp += 1
 		
-		#rozmieszczenie trojek		
+		# place 2 ships with three field
 		tmp = 1
 		while tmp != 3:
 			os.system("clear")
@@ -121,16 +119,14 @@ class Map:
 				wsp_x = raw_input("Podaj wsp x: ")
 				wsp_y = raw_input("Podaj wsp y: ")
 				
-				# konwersja wsp_x na int
 				try:
 					i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-				except ValueError:                  # kod obslugujacy bledy
+				except ValueError:           
 					print "Blad przy konwersji wsp x"
 				
-				# konwersja wsp_y na int
 				try:
 					i_wsp_y = int(wsp_y)
-				except ValueError:                  # kod obslugujacy bledy
+				except ValueError:      
 					print "Blad pry konwersji wsp y"
 				
 				self.update_map(i_wsp_x, i_wsp_y, 'X')
@@ -141,22 +137,20 @@ class Map:
 			
 		os.system("clear")
 		self.print_map()
-		# rozmieszczenie czworki
+		# place 1 ship with four field
 		print "Rozmieszczamy 'czworke' "
 		for i in range(4):
 			wsp_x = raw_input("Podaj wsp x: ")
 			wsp_y = raw_input("Podaj wsp y: ")
 			
-			# konwersja wsp_x na int
 			try:
 				i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-			except ValueError:                  # kod obslugujacy bledy
+			except ValueError:              
 				print "Blad przy konwersji wsp x"
 			
-			# konwersja wsp_y na int
 			try:
 				i_wsp_y = int(wsp_y)
-			except ValueError:                  # kod obslugujacy bledy
+			except ValueError:             
 				print "Blad pry konwersji wsp y"
 			
 			self.update_map(i_wsp_x, i_wsp_y, 'X')
@@ -165,10 +159,12 @@ class Map:
 		self.print_map()
 	
 	def fill_map(self):
+		"""Arrange the ships on the map radomly"""
 	
-		# funkcja sprawdzajaca sasiadow
 		def chceck_neighbors(wsp_x, wsp_y):
-			# sprawdzanie podstawowych kierunkow
+			"""Chceck the neighboring area"""
+			
+			# determination of basic directions
 			x_up = wsp_x
 			y_up = wsp_y - 1
 			x_down = wsp_x
@@ -178,7 +174,7 @@ class Map:
 			x_right = wsp_x + 1
 			y_right = wsp_y
 			
-			# sprawdzanie skosnych kierunkow
+			# determination of oblique directions
 			x_up_left = wsp_x - 1
 			y_up_left = wsp_y - 1
 			x_up_right = wsp_x + 1
@@ -197,7 +193,7 @@ class Map:
 			else:
 				return False
 		
-		# umieszczanie na mapie 'jedynek'
+		# place 4 ships with one field
 		tmp = 4
 		while tmp > 0:
 			wsp_x = randrange(1,11)
@@ -207,7 +203,7 @@ class Map:
 				self.allShips[tmp-1].append([wsp_x, wsp_y])
 				tmp -= 1
 				
-		# umieszczanie na mapie 'dwojek'
+		# place 3 ships with two field
 		tmp = 3
 		while tmp > 0:
 			direction = randrange(1,3)
@@ -230,7 +226,7 @@ class Map:
 					self.allShips[tmp+3].append([wsp_x, wsp_y-1])
 					tmp -= 1
 		
-		# umieszczanie na mapie 'trojek'
+		# place 2 ships with three field
 		tmp = 2
 		while tmp > 0:
 			direction = randrange(1,3)
@@ -263,7 +259,7 @@ class Map:
 					self.allShips[tmp+6].append([wsp_x-1, wsp_y])
 					tmp -= 1
 					
-		# umieszczanie na mapie 'czworek'
+		# place 1 ship with four field
 		tmp = 1
 		while tmp > 0:
 			direction = randrange(1,3)
@@ -303,7 +299,7 @@ class Map:
 					tmp -= 1
 	
 class Game:
-	# zmienne do interfejsu
+	"""Class representing the game"""
 	PURPLE = '\033[95m'
 	BLUE = '\033[94m'
 	GREEN = '\033[92m'
@@ -319,8 +315,8 @@ class Game:
 	computer_map = Map()
 	tmp_map = Map()
 	
-	# POPRAWIC WYRYSOWYWANIE STATKOW
 	def color_ships(self, tmp_map, computer_map):
+		"""Change character sunken ships"""
 		for ship in self.computer_map.allShips:
 			triger = True;
 			for area in range(len(ship)):
@@ -340,6 +336,7 @@ class Game:
 					self.tmp_map[y_tmp][x_tmp] = '@'
 				
 	def start_game(self):
+		"""Game menu logic"""
 		menu = 1
 		key = 'f'
 		redraw = True
@@ -347,7 +344,6 @@ class Game:
 		self.draw(menu)
 		
 		while True:
-			
 			key = raw_input()
 			
 			if menu == 1:
@@ -406,6 +402,7 @@ class Game:
 				redraw = False	
 		
 	def print_all_map(self):
+		"""Print all maps to standard output """
 	
 		os.system("clear")
 		pixel = 70
@@ -424,6 +421,7 @@ class Game:
 		self.my_map.print_map()
 		
 	def run_game(self):
+		"""Logic of the whole game"""
 		wsp_x = 0
 		wsp_y = 0
 		i_wsp_y = 0
@@ -432,9 +430,9 @@ class Game:
 		mySunkenShips = 0
 		computerSunkenShips = 0
 		
-		# zmienna przechwujaca informacje kogo jest kolejny ruchu
-		# 1 - gracz
-		# 2 - komputer
+		# A variable that holds information about next move
+		# 1 - player
+		# 2 - computer
 		nextShoot = 1
 		
 		self.my_map = Map()
@@ -447,7 +445,7 @@ class Game:
 			else:
 				return False
 		
-		# uzupelnianie map
+		# fill map
 		if self.autoFillMap:
 			self.my_map.fill_map()
 		else:
@@ -463,49 +461,48 @@ class Game:
 				wsp_x = raw_input("Podaj wsp x: ")
 				wsp_y = raw_input("Podaj wsp y: ")
 				
-				# konwersja wsp_x na int
+				# conversion wsp_x to int
 				try:
 					i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-				except ValueError:                  # kod obslugujacy bledy
+				except ValueError:                  
 					print "Blad przy konwersji wsp x"
 				
-				# konwersja wsp_y na int
+				# conversion wsp_y to int
 				try:
 					i_wsp_y = int(wsp_y)
-				except ValueError:                  # kod obslugujacy bledy
+				except ValueError:                  
 					print "Blad pry konwersji wsp y"
 				
 				
-				# ustalenie kto wykonuje kolejny ruchu
-				# sprwdzenie czy zostal trafiony statek
+				# Check who doing next move
+				# Verify that the ship has hit
 				if self.computer_map[i_wsp_y][i_wsp_x] == 'X':
 					self.tmp_map.update_map(i_wsp_x, i_wsp_y, 'X')
 					computerSunkenShips += 1
 					nextShoot = 1
 				else:
 					nextShoot = 2
-					# jesli statek nie zostal trafiony zaznaczamy tylko strzal
 					self.tmp_map.update_map(i_wsp_x, i_wsp_y, '*')
 					
 			if nextShoot == 2:
-				#wykonanie ruchu komputera
+				
 				while True:
 					i_wsp_x = randrange(1,11)
 					i_wsp_y = randrange(1,11)
 					if self.my_map[i_wsp_y][i_wsp_x] != '*':
-						#sprawdzenie czy nastapilo trafienie w statek
+						# Verify that the ship has hit
 						if self.my_map[i_wsp_y][i_wsp_x] == 'X':
 							mySunkenShips += 1
 						self.my_map.update_map(i_wsp_x, i_wsp_y, '*')
 						break
 				
-				#kolejka gracza
+				# player's turn
 				nextShoot = 1
 				
 			self.color_ships(self.tmp_map, self.computer_map)
 			
 		
-		# sprawdzenie kto wygral
+		# check who win
 		if mySunkenShips >= 20:
 			os.system("clear")
 			pixel = 70
@@ -526,8 +523,8 @@ class Game:
 			print "=====================".center(pixel)
 			print self.NORMAL
 				
-	# funkcja rysujaca interfejs menu
 	def draw(self, screen):
+		"""Draws the menu interface"""
 		os.system("clear")
 		pixel = 70
 		if screen == 1:
@@ -542,11 +539,9 @@ class Game:
 			print " d - WYJSCIE".center(pixel)
 			print self.YELLOW+"========================".center(pixel), self.NORMAL
 		elif screen == 2:
-			# start gry
 			self.run_game()
 			
 		elif screen == 3:
-			# Autor
 			print self.GREEN+"==== AUTOR GRY: ==== ".center(pixel)
 			print self.BLUE+"1. Damian Polchlopek  ".center(pixel)
 			print self.GREEN+"=====================".center(pixel)
@@ -557,7 +552,6 @@ class Game:
 			print self.NORMAL
 		
 		elif screen == 4:
-			# ustawienia gry
 			print self.GREEN+"==== AKTUALNE USTAWIENIA GRY: ===="+self.NORMAL
 			print self.BLUE+"-----------------------------------------"+self.NORMAL
 			print self.BLUE+" Automatyczne generowanie mapy -"+self.NORMAL, self.autoFillMap
@@ -570,7 +564,6 @@ class Game:
 			print "q - menu glowne  ".center(pixel)
 			print "=====================".center(pixel)
 			print self.NORMAL
-		
 		
 		
 game = Game()
