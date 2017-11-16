@@ -298,7 +298,7 @@ class Game:
         try:
             i_wsp_y = int(wsp_y)
         except ValueError:                  
-            print "Blad pry konwersji wsp y"        
+            print "Blad pry konwersji wsp y" 
         
         return i_wsp_x, i_wsp_y
     
