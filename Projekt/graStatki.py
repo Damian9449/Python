@@ -50,6 +50,7 @@ class Map:
         return ""
     
     def ask_coordinates(self):
+        """Ask the user for coordinates"""
         wsp_x = raw_input("Podaj wsp x [w postaci A...J]:  ")
         wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
 
@@ -285,6 +286,7 @@ class Game:
     tmp_map = Map()
     
     def ask_coordinates(self):
+        """Ask the user for coordinates"""
         wsp_x = raw_input("Podaj wsp x [w postaci A...J]: ")
         wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
 
