@@ -42,41 +42,45 @@ class Map:
         self.allShips = [list() for i in range(10)]		
         
     def __str__(self):
-        """Return a warning about bad map output"""
-        return "Wskazane jest wypisanie mapy za pomoca specjalnej funkcji"
-
-    def print_map(self):
         """Write a map to standard output"""
         for row in self.myMap:
             for node in row:
                 sys.stdout.write(node)
             print ""
+        return ""
+    
+    def ask_coordinates(self):
+        wsp_x = raw_input("Podaj wsp x [w postaci A...J]:  ")
+        wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
 
+        # conversion wsp_x to int
+        try:
+            i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
+        except ValueError:                  
+            print "Blad przy konwersji wsp x"
 
+        # conversion wsp_y to int
+        try:
+            i_wsp_y = int(wsp_y)
+        except ValueError:                  
+            print "Blad pry konwersji wsp y"        
+        
+        return i_wsp_x, i_wsp_y, wsp_x, wsp_y
+    
     def update_map(self, wsp_x, wsp_y, character):
         """Change character on map"""
         self.myMap[wsp_y][wsp_x] = character
-
+       
     def manual_fill_map(self):
         """Arrange the ships on the map manually"""
         # place 4 ships with one field
         tmp = 1
         while tmp != 5:
             os.system("clear")
-            self.print_map()
+            print self
             print "Rozmieszczamy 'jedynke' "
-            wsp_x = raw_input("Podaj wsp x: ")
-            wsp_y = raw_input("Podaj wsp y: ")
             
-            try:
-                i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-            except ValueError:                 
-                print "Blad przy konwersji wsp x"
-            
-            try:
-                i_wsp_y = int(wsp_y)
-            except ValueError:                 
-                print "Blad pry konwersji wsp y"
+            i_wsp_x, i_wsp_y, wsp_x, wsp_y = self.ask_coordinates()
             
             self.update_map(i_wsp_x, i_wsp_y, 'X')
             self.allShips[tmp-1].append([wsp_x, wsp_y])
@@ -87,23 +91,11 @@ class Map:
         tmp = 1
         while tmp != 4:
             os.system("clear")
-            self.print_map()
+            print self
             print "Rozmieszczamy 'dwojke' "
             
             for i in range(2):
-                wsp_x = raw_input("Podaj wsp x: ")
-                wsp_y = raw_input("Podaj wsp y: ")
-                
-                try:
-                    i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-                except ValueError:                 
-                    print "Blad przy konwersji wsp x"
-                
-                try:
-                    i_wsp_y = int(wsp_y)
-                except ValueError:            
-                    print "Blad pry konwersji wsp y"
-                
+                i_wsp_x, i_wsp_y, wsp_x, wsp_y = self.ask_coordinates()
                 self.update_map(i_wsp_x, i_wsp_y, 'X')
                 self.allShips[tmp+3].append([wsp_x, wsp_y])
                 
@@ -113,23 +105,11 @@ class Map:
         tmp = 1
         while tmp != 3:
             os.system("clear")
-            self.print_map()
+            print self
             print "Rozmieszczamy 'trojke' "
             
             for i in range(3):
-                wsp_x = raw_input("Podaj wsp x: ")
-                wsp_y = raw_input("Podaj wsp y: ")
-                
-                try:
-                    i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-                except ValueError:           
-                    print "Blad przy konwersji wsp x"
-                
-                try:
-                    i_wsp_y = int(wsp_y)
-                except ValueError:      
-                    print "Blad pry konwersji wsp y"
-                
+                i_wsp_x, i_wsp_y, wsp_x, wsp_y = self.ask_coordinates()
                 self.update_map(i_wsp_x, i_wsp_y, 'X')
                 self.allShips[tmp+6].append([wsp_x, wsp_y])
             
@@ -137,27 +117,15 @@ class Map:
             
             
         os.system("clear")
-        self.print_map()
+        print self
         # place 1 ship with four field
         print "Rozmieszczamy 'czworke' "
         for i in range(4):
-            wsp_x = raw_input("Podaj wsp x: ")
-            wsp_y = raw_input("Podaj wsp y: ")
-            
-            try:
-                i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-            except ValueError:              
-                print "Blad przy konwersji wsp x"
-            
-            try:
-                i_wsp_y = int(wsp_y)
-            except ValueError:             
-                print "Blad pry konwersji wsp y"
-            
+            i_wsp_x, i_wsp_y, wsp_x, wsp_y = self.ask_coordinates()
             self.update_map(i_wsp_x, i_wsp_y, 'X')
             self.allShips[9].append([wsp_x, wsp_y])
         
-        self.print_map()
+        print self
 
     def fill_map(self):
         """Arrange the ships on the map radomly"""
@@ -315,7 +283,25 @@ class Game:
     my_map = Map()
     computer_map = Map()
     tmp_map = Map()
+    
+    def ask_coordinates(self):
+        wsp_x = raw_input("Podaj wsp x [w postaci A...J]: ")
+        wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
 
+        # conversion wsp_x to int
+        try:
+            i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
+        except ValueError:                  
+            print "Blad przy konwersji wsp x"
+
+        # conversion wsp_y to int
+        try:
+            i_wsp_y = int(wsp_y)
+        except ValueError:                  
+            print "Blad pry konwersji wsp y"        
+        
+        return i_wsp_x, i_wsp_y
+    
     def color_ships(self, tmp_map, computer_map):
         """Change character sunken ships"""
         for ship in self.computer_map.allShips:
@@ -328,7 +314,6 @@ class Game:
                     print "True"
                 else:
                     triger = False
-                    break
                 
             if triger:
                 for area in range(len(ship)):
@@ -410,16 +395,16 @@ class Game:
         # print self.RED+"========================".center(pixel),self. NORMAL
         # print self.YELLOW + "Computer".center(pixel) + self.NORMAL	
         # print self.RED+"========================".center(pixel), self.NORMAL
-        # self.computer_map.print_map()
+        # print self.computer_map
         print self.RED+"========================".center(pixel),self. NORMAL
         print self.YELLOW + "Twoje strzaly".center(pixel) + self.NORMAL	
         print self.RED+"========================".center(pixel), self.NORMAL
-        self.tmp_map.print_map()
+        print self.tmp_map
         print "\n"
         print self.RED+"========================".center(pixel), self.NORMAL
         print self.YELLOW + "Twoja mapa".center(pixel) + self.NORMAL	
         print self.RED+"========================".center(pixel), self.NORMAL
-        self.my_map.print_map()
+        print self.my_map
         
     def run_game(self):
         """Logic of the whole game"""
@@ -459,21 +444,8 @@ class Game:
             self.print_all_map()
             
             if nextShoot == 1:
-                wsp_x = raw_input("Podaj wsp x: ")
-                wsp_y = raw_input("Podaj wsp y: ")
-                
-                # conversion wsp_x to int
-                try:
-                    i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-                except ValueError:                  
-                    print "Blad przy konwersji wsp x"
-                
-                # conversion wsp_y to int
-                try:
-                    i_wsp_y = int(wsp_y)
-                except ValueError:                  
-                    print "Blad pry konwersji wsp y"
-                
+               
+                i_wsp_x, i_wsp_y = self.ask_coordinates()
                 
                 # Check who doing next move
                 # Verify that the ship has hit
