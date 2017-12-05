@@ -293,10 +293,10 @@ class Game:
         bad_wsp_y = True
         
         while bad_wsp:
-            wsp_x = raw_input("Podaj wsp x [w postaci A...J]: ")
+            wsp_x = raw_input("Podaj wsp x [w postaci A...J/a...j]: ")
             wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
             
-            # wsp_x duza literka wsp_y liczba
+            # wsp_x uppercase, wsp_y number
             if wsp_x > '@' and wsp_x < 'K':
                 # conversion wsp_x to int
                 try:
@@ -308,7 +308,7 @@ class Game:
                     bad_wsp_x = False
 
                     
-                # wsp_x mala literka wsp_y liczba
+                # wsp_x lowerCase wsp_y number
             elif wsp_x > '`' and wsp_x < 'k':
             
                 # conversion wsp_x to int
@@ -336,7 +336,8 @@ class Game:
             
             # print out message when all wsp are incorrect
             if bad_wsp:
-                print "Zle wpisanie wsp, podaj je jeszcze raz !!!"
+                print "Zle podane wspolrzedne ruchu."
+                print "Popatrz na podpowiedz w nawiasach!"
             
        
         return i_wsp_x, i_wsp_y
