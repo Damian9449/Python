@@ -51,20 +51,51 @@ class Map:
     
     def ask_coordinates(self):
         """Ask the user for coordinates"""
-        wsp_x = raw_input("Podaj wsp x [w postaci A...J]:  ")
-        wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
-    
-        # conversion wsp_x to int
-        try:
-            i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-        except ValueError:                  
-            print "Blad przy konwersji wsp x"
-    
-        # conversion wsp_y to int
-        try:
-            i_wsp_y = int(wsp_y)
-        except ValueError:                  
-            print "Blad pry konwersji wsp y"        
+        bad_wsp = True
+        bad_wsp_x = True
+        bad_wsp_y = True
+        
+        while bad_wsp:
+            wsp_x = raw_input("Podaj wsp x [w postaci A...J/a...j]: ")
+            wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
+            
+            wsp_x = wsp_x.upper()
+            
+            # wsp_x uppercase, wsp_y number
+            if wsp_x > '@' and wsp_x < 'K':
+                # conversion wsp_x to int
+                try:
+                    i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
+                except ValueError:                  
+                    bad_wsp_x = True
+                else:
+                    bad_wsp_x = False
+            
+            
+            # DOPISAC TuTAJ TROCHE LOGIKI BO BEDZIE LIPA !!!!!
+            # SPRAWDZENIE CZY Y JEST W RAMACH ROZSADKU !!!!!
+            
+            # conversion wsp_y to int
+            try:
+                i_wsp_y = int(wsp_y)
+            except ValueError:                  
+                bad_wsp_y = True
+            else:
+                if i_wsp_y > 0 and i_wsp_y < 11:
+                    bad_wsp_y = False 
+                else:
+                    bad_wsp_y = True
+            
+            # check if wsp_x and wsp_y are correct
+            if bad_wsp_x == False and bad_wsp_y == False:
+                bad_wsp = False
+            else:
+                bad_wsp = True      
+            
+            # print out message when all wsp are incorrect
+            if bad_wsp:
+                print self.RED + "Zle podane wspolrzedne ruchu."
+                print "Popatrz na podpowiedz w nawiasach!", self.NORMAL
         
         return i_wsp_x, i_wsp_y, wsp_x, wsp_y
     
@@ -296,29 +327,17 @@ class Game:
             wsp_x = raw_input("Podaj wsp x [w postaci A...J/a...j]: ")
             wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
             
+            wsp_x = wsp_x.upper()
+            
             # wsp_x uppercase, wsp_y number
-            if wsp_x > '@' and wsp_x < 'K':
+            if wsp_x > '@' and wsp_x < 'K' and len(wsp_x) == 1:
                 # conversion wsp_x to int
                 try:
                     i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-                    
                 except ValueError:                  
                     bad_wsp_x = True
                 else:
                     bad_wsp_x = False
-
-                    
-                # wsp_x lowerCase wsp_y number
-            elif wsp_x > '`' and wsp_x < 'k':
-            
-                # conversion wsp_x to int
-                try:
-                    i_wsp_x = int(ord(wsp_x) - ord('a') + 1)
-                    
-                except ValueError:                  
-                    bad_wsp_x = True
-                else:
-                    bad_wsp_x = False     
             
             # conversion wsp_y to int
             try:
@@ -326,7 +345,10 @@ class Game:
             except ValueError:                  
                 bad_wsp_y = True
             else:
-                bad_wsp_y = False 
+                if i_wsp_y > 0 and i_wsp_y < 11:
+                    bad_wsp_y = False 
+                else:
+                    bad_wsp_y = True
             
             # check if wsp_x and wsp_y are correct
             if bad_wsp_x == False and bad_wsp_y == False:
@@ -336,8 +358,8 @@ class Game:
             
             # print out message when all wsp are incorrect
             if bad_wsp:
-                print "Zle podane wspolrzedne ruchu."
-                print "Popatrz na podpowiedz w nawiasach!"
+                print self.RED + "Zle podane wspolrzedne ruchu."
+                print "Popatrz na podpowiedz w nawiasach!", self.NORMAL
             
        
         return i_wsp_x, i_wsp_y
@@ -433,7 +455,7 @@ class Game:
         os.system("clear")
         pixel = 70
         # print self.RED+"========================".center(pixel),self. NORMAL
-        # print self.YELLOW + "Computer".center(pixel) + self.NORMAL	
+        # print self.YELLOW + "Komputer".center(pixel) + self.NORMAL	
         # print self.RED+"========================".center(pixel), self.NORMAL
         # print self.computer_map
         print self.RED+"========================".center(pixel),self. NORMAL
@@ -479,23 +501,42 @@ class Game:
         
         self.computer_map.fill_map()
         
+        
+        
+        
+        
+        incorrectShoot = False
+        
         while check_win():
             os.system("clear")
             self.print_all_map()
             
             if nextShoot == 1:
                
+                # Print out message about incorrect shoot
+                if incorrectShoot:
+                    print self.RED+"Strzeliles juz w to pole."
+                    print "Wykonaj ruch jeszcze raz." + self.NORMAL
+                    
                 i_wsp_x, i_wsp_y = self.ask_coordinates()
                 
-                # Check who doing next move
-                # Verify that the ship has hit
-                if self.computer_map[i_wsp_y][i_wsp_x] == 'X':
-                    self.tmp_map.update_map(i_wsp_x, i_wsp_y, 'X')
-                    computerSunkenShips += 1
-                    nextShoot = 1
+                # Check if player hit in empty area
+                if self.tmp_map[i_wsp_y][i_wsp_x] == self.BLUE+'.'+self.NORMAL:
+                    incorrectShoot = False
+                    # Check who doing next move
+                    # Verify that the ship has hit
+                    if self.computer_map[i_wsp_y][i_wsp_x] == 'X':
+                        self.tmp_map.update_map(i_wsp_x, i_wsp_y, 'X')
+                        computerSunkenShips += 1
+                        nextShoot = 1
+                        
+                    else:
+                        nextShoot = 2
+                        self.tmp_map.update_map(i_wsp_x, i_wsp_y, '*')
+                        
                 else:
-                    nextShoot = 2
-                    self.tmp_map.update_map(i_wsp_x, i_wsp_y, '*')
+                    incorrectShoot = True
+                    
                     
             if nextShoot == 2:
                 
@@ -511,7 +552,8 @@ class Game:
                 
                 # player's turn
                 nextShoot = 1
-                
+            
+            
             self.color_ships(self.tmp_map, self.computer_map)
             
         

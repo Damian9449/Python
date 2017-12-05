@@ -293,40 +293,28 @@ class Game:
         bad_wsp_y = True
         
         while bad_wsp:
-            wsp_x = raw_input("Podaj wsp x [w postaci A...J]: ")
+            wsp_x = raw_input("Podaj wsp x [w postaci A...J/a...j]: ")
             wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
             
-            # wsp_x duza literka wsp_y liczba
+            wsp_x = wsp_x.upper()
+            
+            # wsp_x uppercase, wsp_y number
             if wsp_x > '@' and wsp_x < 'K':
                 # conversion wsp_x to int
                 try:
                     i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-                    
                 except ValueError:                  
                     bad_wsp_x = True
                 else:
                     bad_wsp_x = False
-
-                    
-                # wsp_x mala literka wsp_y liczba
-            elif wsp_x > '`' and wsp_x < 'k':
-            
-                # conversion wsp_x to int
-                try:
-                    i_wsp_x = int(ord(wsp_x) - ord('a') + 1)
-                    
-                except ValueError:                  
-                    bad_wsp_x = True
-                else:
-                    bad_wsp_x = False     
             
             # conversion wsp_y to int
-            try:
-                i_wsp_y = int(wsp_y)
-            except ValueError:                  
-                bad_wsp_y = True
-            else:
-                bad_wsp_y = False 
+                try:
+                    i_wsp_y = int(wsp_y)
+                except ValueError:                  
+                    bad_wsp_y = True
+                else:
+                    bad_wsp_y = False 
             
             # check if wsp_x and wsp_y are correct
             if bad_wsp_x == False and bad_wsp_y == False:
@@ -336,7 +324,8 @@ class Game:
             
             # print out message when all wsp are incorrect
             if bad_wsp:
-                print "Zle wpisanie wsp, podaj je jeszcze raz !!!"
+                print self.RED + "Zle podane wspolrzedne ruchu."
+                print "Popatrz na podpowiedz w nawiasach!", self.NORMAL
             
        
         return i_wsp_x, i_wsp_y
