@@ -19,7 +19,6 @@ class Map:
 
     myMap = list()
 
-
     # list, which storing areas of all ships
     allShips = []
 
@@ -43,23 +42,24 @@ class Map:
         
     def __str__(self):
         """Write a map to standard output"""
+        allMap = ""
         for row in self.myMap:
             for node in row:
-                sys.stdout.write(node)
-            print ""
-        return ""
+                allMap += node
+            allMap += '\n'
+        return allMap
     
     def ask_coordinates(self):
         """Ask the user for coordinates"""
         wsp_x = raw_input("Podaj wsp x [w postaci A...J]:  ")
         wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
-
+    
         # conversion wsp_x to int
         try:
             i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
         except ValueError:                  
             print "Blad przy konwersji wsp x"
-
+    
         # conversion wsp_y to int
         try:
             i_wsp_y = int(wsp_y)
@@ -287,21 +287,58 @@ class Game:
     
     def ask_coordinates(self):
         """Ask the user for coordinates"""
-        wsp_x = raw_input("Podaj wsp x [w postaci A...J]: ")
-        wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
-
-        # conversion wsp_x to int
-        try:
-            i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
-        except ValueError:                  
-            print "Blad przy konwersji wsp x"
-
-        # conversion wsp_y to int
-        try:
-            i_wsp_y = int(wsp_y)
-        except ValueError:                  
-            print "Blad pry konwersji wsp y" 
+       
+        bad_wsp = True
+        bad_wsp_x = True
+        bad_wsp_y = True
         
+        while bad_wsp:
+            wsp_x = raw_input("Podaj wsp x [w postaci A...J]: ")
+            wsp_y = raw_input("Podaj wsp y [w postaci 1...10]: ")
+            
+            # wsp_x duza literka wsp_y liczba
+            if wsp_x > '@' and wsp_x < 'K':
+                # conversion wsp_x to int
+                try:
+                    i_wsp_x = int(ord(wsp_x) - ord('A') + 1)
+                    
+                except ValueError:                  
+                    bad_wsp_x = True
+                else:
+                    bad_wsp_x = False
+
+                    
+                # wsp_x mala literka wsp_y liczba
+            elif wsp_x > '`' and wsp_x < 'k':
+            
+                # conversion wsp_x to int
+                try:
+                    i_wsp_x = int(ord(wsp_x) - ord('a') + 1)
+                    
+                except ValueError:                  
+                    bad_wsp_x = True
+                else:
+                    bad_wsp_x = False     
+            
+            # conversion wsp_y to int
+            try:
+                i_wsp_y = int(wsp_y)
+            except ValueError:                  
+                bad_wsp_y = True
+            else:
+                bad_wsp_y = False 
+            
+            # check if wsp_x and wsp_y are correct
+            if bad_wsp_x == False and bad_wsp_y == False:
+                bad_wsp = False
+            else:
+                bad_wsp = True      
+            
+            # print out message when all wsp are incorrect
+            if bad_wsp:
+                print "Zle wpisanie wsp, podaj je jeszcze raz !!!"
+            
+       
         return i_wsp_x, i_wsp_y
     
     def color_ships(self, tmp_map, computer_map):
