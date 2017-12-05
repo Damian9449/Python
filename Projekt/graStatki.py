@@ -70,10 +70,7 @@ class Map:
                     bad_wsp_x = True
                 else:
                     bad_wsp_x = False
-            
-            
-            # DOPISAC TuTAJ TROCHE LOGIKI BO BEDZIE LIPA !!!!!
-            # SPRAWDZENIE CZY Y JEST W RAMACH ROZSADKU !!!!!
+
             
             # conversion wsp_y to int
             try:
@@ -500,9 +497,6 @@ class Game:
             self.my_map.manual_fill_map()
         
         self.computer_map.fill_map()
-        
-        
-        
         
         
         incorrectShoot = False
