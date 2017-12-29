@@ -27,7 +27,7 @@
 ###############################################################
 
 
-def solve1(a, b, c):
+def solve1(a = 0.0, b = 0.0, c = 0.0):
     """Rozwiazywanie rownania liniowego a x + b y + c = 0."""
 
     def nwd(m1, m2):
@@ -45,13 +45,20 @@ def solve1(a, b, c):
             y, lastY = lastY - q * y, y
         return lastX, lastY
 	
-	
-    if c % nwd(a, b) == 0:
-        x0, y0 = euklides(a, b, c)
-        print("Rozwiazanie: x = ", x0, " + ", (b/nwd(a, b)), "t, gdzie t nalezy do liczb calkowitych \n" 
-                  "\t \t \t y = ", y0, " + ", (a/nwd(a, b)), "t, gdzie t nalezy do liczb calkowitych"  )
+
+    if a == 0 and b == 0 and c != 0:
+        print "Rownanie sprzeczne"
+    elif a == 0 and b != 0:
+        print "Rozwiazanie: y = -"+str(c*1.0/b)
+    elif a != 0 and b == 0:
+        print "Rozwiazanie: x = -"+str(c*1.0/a)
     else:
-        print("Rownanie nie ma rozwiazania")
+        if c % nwd(a, b) == 0:
+            x0, y0 = euklides(a, b, c)
+            print "Rozwiazanie: x = ", x0, " + ", (b/nwd(a, b)), "t, gdzie t nalezy do liczb calkowitych \n" \
+                    "\t \t y = ", y0, " + ", (a/nwd(a, b)), "t, gdzie t nalezy do liczb calkowitych"  
+        else:
+            print "nie ma rozw"
 
 
-solve1(3, 5, 11)
+solve1(2, 5, 11)
