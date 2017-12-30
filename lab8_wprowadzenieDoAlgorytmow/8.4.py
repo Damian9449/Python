@@ -8,7 +8,8 @@ def heron(a, b, c):
     
     if a + b > c and \
        a + c > b and \
-       b + c > a:
+       b + c > a and \
+       a > 0 and b > 0 and c > 0:
        
         p = (a + b + c) / 2.0
         area = sqrt(p * (p - a) * (p - b) * (p - c))
@@ -17,5 +18,5 @@ def heron(a, b, c):
         raise ValueError("I can't calculate area of this triangle")
 
 
-print("Area: ", heron(6, 2, 6))
+print("Area: ", heron(6.2, 2, 6))
 
